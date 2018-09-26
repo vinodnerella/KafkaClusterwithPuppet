@@ -6,7 +6,7 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 require 'yaml'
-cnf = YAML::load(File.open('/Users/vinodnerella/vagrant/puppet/manifest.yml'))
+cnf = YAML::load(File.open('<path to file>/manifest.yml'))
 instances = cnf['instances'].to_i
 
 Vagrant.configure("2") do |config|
