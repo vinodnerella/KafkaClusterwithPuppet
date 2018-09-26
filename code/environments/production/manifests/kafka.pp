@@ -5,7 +5,16 @@ $repository_url      = 'http://www-us.apache.org/dist/kafka/2.0.0/kafka_2.11-2.0
 $archive_name        = "${package_name}.tgz"
 $kafka_directory = "$install_path/$package_name"
 $serverproperties_file         = "$kafka_directory/config/server.properties"
-  group { 'kafka':
+    archive { $archive_name:
+    	path         => "/tmp/${archive_name}",
+  	source       => $repository_url,
+  	extract      => true,
+  	extract_path => $install_path,
+  	creates      => "${install_path}/${package_name}",
+  	cleanup      => true,
+	}
+#Adding kafka group and user
+group { 'kafka':
       ensure => 'present',
       gid    => '1007',
      }
@@ -19,15 +28,7 @@ $serverproperties_file         = "$kafka_directory/config/server.properties"
       uid              => '1007',
       managehome      => true
     }
-    archive { $archive_name:
-    	path         => "/tmp/${archive_name}",
-  	source       => $repository_url,
-  	extract      => true,
-  	extract_path => $install_path,
-  	creates      => "${install_path}/${package_name}",
-  	cleanup      => true,
-	}
-
+    
 #Changing the permissions to Kafka folder
 exec { 'kafka permission':
   command   => "chown -R kafka:kafka $kafka_directory",
