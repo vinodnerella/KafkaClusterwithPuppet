@@ -1,7 +1,7 @@
 ---
-  instances: 4
+  instances: <number of instances>
   name_prefix: <hostname>
-  memory: 2048
-  cpus: 1
+  memory: <memory required> #E.g.: 2048 for 2 GB RAM
+  cpus: <no.of cores> #Number of cores required for machine
   privateip_prefix: <ipaddress>
   bootstrap: <path to file>/bootstrap.sh
